@@ -1,12 +1,28 @@
-A high-performance Byte Pair Encoding (BPE) tokenizer implementation for DNA sequences, achieving 5.208x compression on the E. coli genome while discovering biologically meaningful patterns.
+# BPE Tokenizer for DNA Sequences
 
-🎯 Key Results
-MetricRequirementAchievedStatusVocabulary Size≥ 5,000 tokens5,000 tokens✅ PASSCompression Ratio≥ 3.2x5.208x✅ PASS (62.8% above requirement)DatasetNon-readableDNA sequences✅ Double PointsLosslessRequired100% lossless✅ PASS
+![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
+![Status](https://img.shields.io/badge/status-complete-success.svg)
+![Compression](https://img.shields.io/badge/compression-5.208x-brightgreen.svg)
 
-🎉 All requirements exceeded! The tokenizer achieved 62.8% better compression than required.
+A high-performance Byte Pair Encoding (BPE) tokenizer implementation for DNA sequences, achieving **5.208x compression** on the *E. coli* genome while discovering biologically meaningful patterns.
 
+---
 
-📊 Performance Summary
+## 🎯 Key Results
+
+| Metric | Requirement | Achieved | Status |
+|--------|-------------|----------|--------|
+| **Vocabulary Size** | ≥ 5,000 tokens | 5,000 tokens | ✅ **PASS** |
+| **Compression Ratio** | ≥ 3.2x | **5.208x** | ✅ **PASS** (62.8% above requirement) |
+| **Dataset** | Non-readable | DNA sequences | ✅ **Double Points** |
+| **Lossless** | Required | 100% lossless | ✅ **PASS** |
+
+> 🎉 **All requirements exceeded!** The tokenizer achieved 62.8% better compression than required.
+
+---
+
+## 📊 Performance Summary
+```
 Dataset:              E. coli K-12 genome (GCF_000005845.2)
 Original Size:        4,641,652 base pairs
 Compressed Size:      891,316 tokens
@@ -15,20 +31,26 @@ Average Token Length: 5.208 bases
 Longest Token:        26 bases
 Training Time:        88.3 minutes (5,300 seconds)
 Vocab Size:           5,000 tokens
+```
 
-✨ Features
+---
 
-🧬 DNA-Optimized: Specifically designed for genomic sequence compression
-🚀 High Compression: Achieves 5.2x compression while remaining lossless
-🔬 Biological Discovery: Automatically identifies meaningful patterns (codons, TATA boxes, etc.)
-📈 Scalable: Handles multi-million base pair genomes efficiently
-🎯 100% Lossless: Perfect encode-decode reconstruction
-🔧 Modular Design: Clean, reusable codebase with comprehensive utilities
+## ✨ Features
 
+- 🧬 **DNA-Optimized**: Specifically designed for genomic sequence compression
+- 🚀 **High Compression**: Achieves 5.2x compression while remaining lossless
+- 🔬 **Biological Discovery**: Automatically identifies meaningful patterns (codons, TATA boxes, etc.)
+- 📈 **Scalable**: Handles multi-million base pair genomes efficiently
+- 🎯 **100% Lossless**: Perfect encode-decode reconstruction
+- 🔧 **Modular Design**: Clean, reusable codebase with comprehensive utilities
 
-🚀 Quick Start
-Installation
-bash# Clone repository
+---
+
+## 🚀 Quick Start
+
+### Installation
+```bash
+# Clone repository
 git clone https://github.com/yourusername/bpe-dna-tokenizer.git
 cd bpe-dna-tokenizer
 
@@ -38,8 +60,11 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
-Basic Usage
-pythonfrom src import BPETokenizer, load_fasta
+```
+
+### Basic Usage
+```python
+from src import BPETokenizer, load_fasta
 
 # Load data
 corpus = load_fasta("data/raw/ecoli_genome.fna.gz")
@@ -206,10 +231,15 @@ jupyter>=1.0.0
 biopython>=1.79
 requests>=2.26.0
 pytest>=6.2.0
+```
 
-💻 Usage Examples
-Training a New Tokenizer
-pythonfrom src import train_bpe, load_fasta
+---
+
+## 💻 Usage Examples
+
+### Training a New Tokenizer
+```python
+from src import train_bpe, load_fasta
 
 # Load genome
 corpus = load_fasta("data/raw/ecoli_genome.fna.gz")
@@ -222,8 +252,11 @@ vocab, merge_rules, compressed_tokens = train_bpe(
 )
 
 print(f"Compression: {len(corpus) / len(compressed_tokens):.2f}x")
-Encoding and Decoding
-pythonfrom src import encode, decode
+```
+
+### Encoding and Decoding
+```python
+from src import encode, decode
 
 # Encode a sequence
 sequence = "ATGAAACGCATTAGCACCACCATTACCACCACCATCA"
@@ -233,16 +266,22 @@ encoded_ids = encode(sequence, vocab, merge_rules)
 decoded_sequence = decode(encoded_ids, vocab)
 
 assert sequence == decoded_sequence  # Lossless!
-Saving and Loading
-pythonfrom src import save_tokenizer, load_tokenizer
+```
+
+### Saving and Loading
+```python
+from src import save_tokenizer, load_tokenizer
 
 # Save trained tokenizer
 save_tokenizer(vocab, merge_rules, "my_tokenizer.pkl")
 
 # Load later
 vocab, merge_rules = load_tokenizer("my_tokenizer.pkl")
-Analysis and Visualization
-pythonfrom src import analyze_vocabulary, plot_results, find_biological_patterns
+```
+
+### Analysis and Visualization
+```python
+from src import analyze_vocabulary, plot_results, find_biological_patterns
 
 # Analyze learned patterns
 analysis = analyze_vocabulary(vocab, merge_rules)
@@ -253,18 +292,28 @@ print(f"Found start codon: {'ATG' in vocab}")
 
 # Create visualizations
 plot_results(vocab, compressed_tokens, corpus)
+```
 
-🎨 Visualizations
-Token Length Distribution
+---
+
+## 🎨 Visualizations
+
+### Token Length Distribution
 Most tokens are 6-8 bases long, representing common genetic motifs and regulatory elements.
-Compression Progress
+
+### Compression Progress
 Training shows consistent improvement, with compression ratio increasing from 2.95x to 5.21x over 4,996 merge iterations.
-Character Balance
+
+### Character Balance
 All four DNA bases (A, C, G, T) are equally represented in the learned vocabulary, reflecting the genome's composition.
 
-🔍 Testing
-All encoding-decoding operations are 100% lossless:
-bash# Run tests
+---
+
+## 🔍 Testing
+
+All encoding-decoding operations are **100% lossless**:
+```bash
+# Run tests
 pytest tests/ -v
 
 # Expected output:
@@ -272,8 +321,11 @@ pytest tests/ -v
 # test_merge_pair ✓
 # test_lossless_encoding ✓
 # test_vocab_size_increases ✓
-Lossless Verification
-python# Test 1: Short sequence
+```
+
+### Lossless Verification
+```python
+# Test 1: Short sequence
 assert decode(encode("ATCGATCG", vocab, rules), vocab) == "ATCGATCG"  ✓
 
 # Test 2: 1000 bases
@@ -316,18 +368,6 @@ The tokenizer's learned patterns align with known *E. coli* genomics:
 
 This validates that **BPE discovers real biological structure**, not just statistical patterns.
 
----
-
-## 📝 Future Work
-
-- [ ] Extend to other organisms (human genome, bacteria, viruses)
-- [ ] Compare with other tokenization methods (WordPiece, Unigram)
-- [ ] Implement GPU acceleration for larger genomes
-- [ ] Create pre-trained models for common organisms
-- [ ] Add support for multi-organism training (pan-genome tokenizer)
-- [ ] Integrate with downstream ML tasks (gene prediction, sequence classification)
-
----
 
 ## 📚 References
 
@@ -335,20 +375,21 @@ This validates that **BPE discovers real biological structure**, not just statis
 2. Blattner, F. R., et al. (1997). The complete genome sequence of *Escherichia coli* K-12. *Science*, 277(5331), 1453-1462.
 3. Gage, P. (1994). A new algorithm for data compression. *C Users Journal*, 12(2), 23-38.
 
+
+## 🙏 Acknowledgments
+
+- **NCBI** for providing high-quality genomic data
+- **Anthropic** for BPE tokenization inspiration from language models
+- **E. coli K-12 strain** for being a model organism since 1946
+- **Rohan Shravan** for an excellent assignment on practical ML applications
+
 ---
 
-## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
-MIT License - Copyright (c) 2024
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction...
+<div align="center">
 
-🙏 Acknowledgments
+**Built with 🧬 for genomics and 🤖 for machine learning**
 
-NCBI for providing high-quality genomic data
-Anthropic for BPE tokenization inspiration from language models
-E. coli K-12 strain for being a model organism since 1946
-Course instructors for an excellent assignment on practical ML applications
+[⬆ Back to Top](#bpe-tokenizer-for-dna-sequences)
+
+</div>
