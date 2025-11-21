@@ -6,6 +6,7 @@
 
 A high-performance Byte Pair Encoding (BPE) tokenizer implementation for DNA sequences, achieving **5.208x compression** on the *E. coli* genome while discovering biologically meaningful patterns.
 
+For working demo visit - https://huggingface.co/spaces/abi96062/BPE-DNA-Tokenizer
 ---
 
 ## 🎯 Key Results
